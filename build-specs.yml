@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - echo Installing dependencies...
+      - mvn install
+
+  pre_build:
+    commands:
+      - echo Running pre-build steps...
+      - mvn clean
+
+  build:
+    commands:
+      - echo Building the project...
+      - mvn package
+
+  post_build:
+    commands:
+      - echo Running post-build steps...
+      - mvn test
+
+artifacts:
+  files:
+    - target/*.jar
+
+cache:
+  paths:
+    - '/root/.m2/**/*'
